@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Conecta+ | Comunicação que acolhe</title>
+<meta name="description" content="Plataforma acolhedora para desenvolver comunicação e confiança ao falar em público." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#18264b; --ink:#27365c; --muted:#71809c; --bg:#f7f9fd; --white:#fff;
+  --blue:#4aa8ed; --teal:#3bc7b1; --coral:#ff7188; --yellow:#ffd968; --purple:#8e7cf0;
+  --green:#5dcc8d; --line:#e7ebf4; --shadow:0 14px 38px rgba(35,53,91,.10);
+  --radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito, sans-serif}
+button,input,textarea,select{font:inherit} button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+.app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 24px}
+.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--yellow),var(--teal),var(--blue));display:grid;place-items:center;font-size:23px;box-shadow:0 7px 18px rgba(59,199,177,.2)}
+.brand strong{font-family:Poppins;font-size:23px;color:var(--navy);letter-spacing:-1px}.brand small{display:block;color:var(--muted);font-size:10px}
+.nav-title{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:#a0abc0;margin:16px 10px 8px;font-weight:900}
+.nav{display:grid;gap:5px}.nav button{width:100%;display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:14px;background:transparent;color:var(--ink);font-weight:800;text-align:left}
+.nav button:hover,.nav button.active{background:#eaf4ff;color:#176ac0}.nav button .ico{font-size:19px;width:23px;text-align:center}
+.badge{margin-left:auto;background:var(--coral);color:#fff;border-radius:99px;font-size:11px;padding:3px 7px}
+.mini-note{margin-top:20px;padding:18px;border-radius:20px;background:linear-gradient(145deg,#fff7cf,#e8fff9);font-family:Caveat;font-size:22px;line-height:1.05;color:var(--navy);position:relative}
+.mini-note:after{content:"♡";position:absolute;right:13px;bottom:8px;font-size:25px;color:var(--coral)}
+.main{min-width:0}.topbar{height:74px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px;padding:0 28px;position:sticky;top:0;z-index:10}
+.search{flex:1;max-width:620px;background:#f3f6fb;border-radius:99px;padding:11px 18px;display:flex;gap:9px;align-items:center;color:#93a0b7}
+.search input{border:0;outline:0;background:transparent;width:100%;color:var(--ink)}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:12px}.round{width:40px;height:40px;border-radius:50%;background:#f2f5fa;display:grid;place-items:center}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#ffd2b8,#9fd8ef);display:grid;place-items:center;font-weight:900;color:#fff;border:3px solid #fff;box-shadow:0 2px 10px #dce2ed}
+.content{padding:24px 28px 40px;max-width:1500px;margin:auto}
+.page{display:none;animation:fade .25s ease}.page.active{display:block}@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{border-radius:25px;min-height:310px;padding:36px 42px;position:relative;overflow:hidden;background:linear-gradient(120deg,#fff4d0 0%,#fff9ec 48%,#e7f8ff 100%);box-shadow:var(--shadow)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;opacity:.9}.hero:before{width:280px;height:280px;background:#ff6f88;right:-60px;top:-110px}.hero:after{width:240px;height:240px;background:#4ec9ba;left:-120px;bottom:-120px}
+.hero-copy{position:relative;z-index:2;max-width:650px}.eyebrow{font-weight:900;color:#287bc1;font-size:13px;letter-spacing:.5px}
+.hero h1{font-family:Caveat;font-size:57px;line-height:.9;margin:8px 0 18px;color:var(--navy)}
+.hero p{font-size:16px;line-height:1.65;max-width:580px;color:#4e5d79}.primary{background:var(--navy);color:#fff;border-radius:99px;padding:12px 19px;font-weight:900;box-shadow:0 8px 18px rgba(24,38,75,.16)}.primary:hover{transform:translateY(-1px)}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:25px 2px 13px}.section-head h2{margin:0;font-family:Poppins;font-size:22px;color:var(--navy)}.section-head p{margin:4px 0 0;color:var(--muted)}
+.grid{display:grid;gap:15px}.quick{grid-template-columns:repeat(4,1fr)}.three{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 8px 25px rgba(35,53,91,.045)}
+.action{display:flex;align-items:center;gap:13px;text-align:left;transition:.2s}.action:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.action-icon{width:45px;height:45px;border-radius:15px;display:grid;place-items:center;font-size:21px}.pink{background:#ffe8ee}.green{background:#e2faf3}.violet{background:#eeeaff}.gold{background:#fff2cc}.blue{background:#e6f4ff}
+.action strong{display:block}.action small{color:var(--muted)}
+.feature{min-height:180px;border-radius:20px;padding:20px;color:#fff;position:relative;overflow:hidden}.feature h3{font-family:Poppins;margin:0 0 7px}.feature p{max-width:240px;line-height:1.45;margin:0 0 16px}.feature button{background:#fff;color:var(--navy);padding:9px 14px;border-radius:99px;font-weight:900}.f1{background:linear-gradient(145deg,#1b4f65,#56bfae)}.f2{background:linear-gradient(145deg,#ff9aab,#e86c8b)}.f3{background:linear-gradient(145deg,#328ddd,#6c6fea)}.f4{background:linear-gradient(145deg,#ffc928,#f29a43)}
+.progress{height:9px;background:#edf0f6;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:inherit;width:var(--w,40%)}
+.pill{display:inline-flex;padding:7px 11px;border-radius:99px;background:#f1f4f9;font-size:12px;font-weight:900;color:#64718b}
+.chat-list{display:grid}.chat{display:flex;gap:12px;padding:13px 4px;border-bottom:1px solid #eef1f6;align-items:center}.chat:last-child{border-bottom:0}.chat .avatar{flex:none}.chat div:nth-child(2){flex:1}.chat small{color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.right-column{display:grid;gap:15px}.status-row{display:flex;gap:12px;overflow:auto;padding-bottom:5px}.status{min-width:60px;text-align:center;font-size:11px;font-weight:800}.status .avatar{margin:auto;border:3px solid var(--teal)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.tab{background:#fff;border:1px solid var(--line);padding:9px 14px;border-radius:99px;font-weight:900;color:#64718b}.tab.active{background:#eaf4ff;color:#176ac0;border-color:#cbe6ff}
+.form-grid{display:grid;gap:15px}.question{font-size:19px;font-weight:900;margin:8px 0 15px}.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.option{padding:14px;border:2px solid #e8ecf3;border-radius:16px;text-align:left;background:#fff;font-weight:800;color:var(--ink)}.option:hover{border-color:#a9d8fa;background:#f8fcff}.option.selected{border-color:var(--blue);background:#eaf6ff}.result{background:linear-gradient(135deg,#ecfff8,#edf7ff);border:1px solid #cfeee4}
+.activity{min-height:290px}.activity h3{font-family:Poppins;margin-top:0}.timer{font-size:58px;font-family:Poppins;font-weight:800;color:var(--navy);text-align:center;margin:20px}.breath{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#9ee8da,#a9d9fa);margin:20px auto;display:grid;place-items:center;font-weight:900;animation:breathe 8s infinite ease-in-out}@keyframes breathe{0%,100%{transform:scale(.82)}50%{transform:scale(1.12)}}
+.prompt{font-family:Caveat;font-size:31px;text-align:center;color:#31527c;margin:18px}.big-emoji{text-align:center;font-size:55px}.meter{display:flex;gap:5px;align-items:center}.meter span{height:14px;flex:1;border-radius:99px;background:#e8edf5}.meter span.on{background:var(--teal)}
+.toast{position:fixed;right:24px;bottom:24px;background:var(--navy);color:#fff;padding:13px 18px;border-radius:14px;box-shadow:var(--shadow);transform:translateY(100px);opacity:0;transition:.25s;z-index:50}.toast.show{transform:none;opacity:1}
+.modal-back{position:fixed;inset:0;background:rgba(24,38,75,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:40}.modal-back.open{display:flex}.modal{max-width:600px;width:100%;background:#fff;border-radius:24px;padding:25px;box-shadow:0 25px 80px rgba(0,0,0,.2)}.close{float:right;background:#f1f4f8;border-radius:50%;width:34px;height:34px}
+footer{margin-top:35px;background:var(--navy);color:#fff;padding:25px;border-radius:25px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}footer small{opacity:.7}
+@media(max-width:1050px){.app{grid-template-columns:82px 1fr}.brand div:not(.logo),.nav button span:not(.ico),.nav-title,.badge,.mini-note{display:none}.brand{justify-content:center;padding:0 0 24px}.nav button{justify-content:center}.quick{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.app{display:block}.sidebar{position:fixed;bottom:0;top:auto;height:70px;width:100%;z-index:30;border-top:1px solid var(--line);border-right:0;padding:7px}.brand,.nav-title,.mini-note{display:none}.nav{display:flex;justify-content:space-around}.nav button{width:auto;padding:9px}.nav button span:not(.ico),.badge{display:none}.topbar{padding:0 15px}.content{padding:15px}.top-actions .round{display:none}.hero{padding:28px 24px}.hero h1{font-size:45px}.quick,.three,.two{grid-template-columns:1fr}.option-grid{grid-template-columns:1fr}.feature{min-height:160px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">💬</div><div><strong>Conecta+</strong><small>Pessoas · Ideias · Juntos</small></div></div>
+  <div class="nav-title">Navegação</div>
+  <nav class="nav">
+    <button class="active" data-page="inicio"><span class="ico">⌂</span><span>Início</span></button>
+    <button data-page="diagnostico"><span class="ico">💭</span><span>Meu diagnóstico</span><span class="badge">3</span></button>
+    <button data-page="treinos"><span class="ico">🎯</span><span>Treinos</span></button>
+    <button data-page="brincadeiras"><span class="ico">🎲</span><span>Brincadeiras</span></button>
+    <button data-page="desafios"><span class="ico">🏆</span><span>Desafios</span></button>
+    <button data-page="biblioteca"><span class="ico">📚</span><span>Biblioteca</span></button>
+    <button data-page="progresso"><span class="ico">📈</span><span>Meu progresso</span></button>
+  </nav>
+  <div class="nav-title">Meu espaço</div>
+  <nav class="nav">
+    <button onclick="openModal('acolhimento')"><span class="ico">💚</span><span>Espaço acolhedor</span></button>
+    <button onclick="showToast('Configurações salvas para este dispositivo!')"><span class="ico">⚙️</span><span>Configurações</span></button>
+  </nav>
+  <div class="mini-note">Você não precisa falar perfeito. Precisa se sentir seguro para começar.</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="search">🔎 <input id="globalSearch" placeholder="Buscar exercícios, dicas ou assuntos..." /></div>
+  <div class="top-actions"><button class="round" onclick="showToast('Você não tem novas notificações ✨')">🔔</button><div class="avatar">D</div><span>⌄</span></div>
+</header>
+
+<section class="content">
+
+<div id="inicio" class="page active">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">🌷 UM ESPAÇO PARA VOCÊ</div>
+      <h1>Comunicação que aproxima</h1>
+      <p>Pratique falar em público no seu ritmo, descubra o que está dificultando sua comunicação e transforme treino em pequenas conquistas — sem pressão e sem julgamentos.</p>
+      <button class="primary" onclick="go('diagnostico')">Começar meu caminho →</button>
+    </div>
+  </div>
+
+  <div class="section-head"><div><h2>O que você quer praticar hoje?</h2><p>Escolha uma atividade. Pode mudar de ideia depois. 💛</p></div></div>
+  <div class="grid quick">
+    <button class="card action" onclick="go('treinos')"><div class="action-icon violet">💬</div><div><strong>Falar com clareza</strong><small>Organize suas ideias</small></div></button>
+    <button class="card action" onclick="startBreathing()"><div class="action-icon green">🌿</div><div><strong>Diminuir a ansiedade</strong><small>Respiração guiada</small></div></button>
+    <button class="card action" onclick="go('brincadeiras')"><div class="action-icon pink">🎲</div><div><strong>Treinar brincando</strong><small>Dinâmicas rápidas</small></div></button>
+    <button class="card action" onclick="go('desafios')"><div class="action-icon gold">🏆</div><div><strong>Fazer um desafio</strong><small>Uma conquista por vez</small></div></button>
+  </div>
+
+  <div class="section-head"><div><h2>Trilhas para experimentar</h2><p>Atividades curtas para diferentes dificuldades.</p></div><button class="tab" onclick="go('biblioteca')">Ver todas →</button></div>
+  <div class="grid three">
+    <article class="feature f1"><h3>Falar sem travar</h3><p>Estratégias para organizar pensamentos e encontrar as palavras.</p><button onclick="openActivity('trava')">Experimentar</button></article>
+    <article class="feature f2"><h3>Confiança gentil</h3><p>Treinos para diminuir o medo de ser julgado durante uma fala.</p><button onclick="openActivity('confianca')">Experimentar</button></article>
+    <article class="feature f3"><h3>Improviso divertido</h3><p>Jogos para desenvolver criatividade e espontaneidade.</p><button onclick="go('brincadeiras')">Jogar agora</button></article>
+  </div>
+
+  <div class="section-head"><div><h2>Seu caminho de hoje</h2><p>Pequenos passos também contam.</p></div></div>
+  <div class="grid two">
+    <div class="card"><div style="display:flex;justify-content:space-between"><strong>🌱 Jornada de comunicação</strong><strong id="progressText">35%</strong></div><p style="color:var(--muted)">Você completou 3 de 8 atividades recomendadas.</p><div class="progress"><i id="progressBar" style="--w:35%"></i></div></div>
+    <div class="card"><strong>💌 Uma mensagem para você</strong><p style="font-family:Caveat;font-size:25px;color:#385579;margin-bottom:0">“Coragem não é não sentir nervosismo. É continuar mesmo quando ele aparece.”</p></div>
+  </div>
+</div>
+
+<div id="diagnostico" class="page">
+  <div class="section-head"><div><h2>Meu diagnóstico de comunicação</h2><p>Não é uma prova. É um mapa para descobrirmos o que pode te ajudar.</p></div></div>
+  <div class="card" id="quiz">
+    <span class="pill" id="qCounter">Pergunta 1 de 5</span>
+    <div class="question" id="questionText"></div>
+    <div class="option-grid" id="options"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:18px"><button class="tab" onclick="prevQuestion()">← Voltar</button><button class="primary" onclick="nextQuestion()">Continuar →</button></div>
+  </div>
+  <div id="diagnosticResult" class="card result" style="display:none;margin-top:15px"></div>
+</div>
+
+<div id="treinos" class="page">
+  <div class="section-head"><div><h2>Treinos guiados</h2><p>Escolha uma habilidade e pratique por poucos minutos.</p></div></div>
+  <div class="tabs"><button class="tab active" onclick="filterTraining('all',this)">Todos</button><button class="tab" onclick="filterTraining('ansiedade',this)">Ansiedade</button><button class="tab" onclick="filterTraining('clareza',this)">Clareza</button><button class="tab" onclick="filterTraining('voz',this)">Voz</button><button class="tab" onclick="filterTraining('improviso',this)">Improviso</button></div>
+  <div class="grid three" id="trainingGrid"></div>
+</div>
+
+<div id="brincadeiras" class="page">
+  <div class="section-head"><div><h2>Aprender brincando 🎲</h2><p>Porque treinar comunicação não precisa parecer uma obrigação.</p></div></div>
+  <div class="grid two">
+    <div class="card activity">
+      <span class="pill">Jogo rápido</span><h3>🎩 O assunto maluco</h3>
+      <p>Escolha um tema aleatório e fale sobre ele por 30 segundos. A ideia é treinar improviso, não perfeição.</p>
+      <div class="big-emoji" id="randomEmoji">🎲</div><div class="prompt" id="randomPrompt">Clique para receber um tema!</div>
+      <button class="primary" onclick="randomTopic()">Sortear tema</button>
+      <button class="tab" onclick="startSpeakingTimer()">Começar 30s</button>
+    </div>
+    <div class="card activity">
+      <span class="pill">Dinâmica</span><h3>🪞 Espelho gentil</h3>
+      <p>Escolha uma qualidade sua e explique por que ela aparece quando você conversa com alguém.</p>
+      <textarea id="mirrorText" rows="4" style="width:100%;border:1px solid var(--line);border-radius:15px;padding:13px;resize:vertical" placeholder="Escreva primeiro..."></textarea>
+      <button class="primary" style="margin-top:10px" onclick="mirrorFeedback()">Receber incentivo</button>
+      <p id="mirrorFeedback" style="font-weight:800;color:#2d8c72"></p>
+    </div>
+  </div>
+</div>
+
+<div id="desafios" class="page">
+  <div class="section-head"><div><h2>Desafios pequenos, conquistas reais 🏆</h2><p>Você escolhe o nível. Não existe comparação com outras pessoas.</p></div></div>
+  <div class="grid three">
+    <div class="card"><span class="pill">🌱 Leve</span><h3>O minuto corajoso</h3><p>Fale por 1 minuto sobre algo que você gosta.</p><button class="primary" onclick="completeChallenge(this)">Aceitar desafio</button></div>
+    <div class="card"><span class="pill">🌼 Médio</span><h3>Explique para um amigo</h3><p>Explique uma ideia usando começo, meio e fim.</p><button class="primary" onclick="completeChallenge(this)">Aceitar desafio</button></div>
+    <div class="card"><span class="pill">🌻 Avançado</span><h3>Mini apresentação</h3><p>Faça uma apresentação de 3 minutos usando três tópicos.</p><button class="primary" onclick="completeChallenge(this)">Aceitar desafio</button></div>
+  </div>
+  <div class="card" style="margin-top:15px"><h3>✨ Regra de ouro</h3><p>Se o desafio parecer grande demais hoje, reduza pela metade. Fazer 30 segundos ainda é treino. Parar, respirar e tentar de novo também é progresso.</p></div>
+</div>
+
+<div id="biblioteca" class="page">
+  <div class="section-head"><div><h2>Biblioteca acolhedora 📚</h2><p>Guias rápidos, checklists e ideias para antes, durante e depois de uma apresentação.</p></div></div>
+  <div class="grid three">
+    <div class="card"><h3>🧩 Antes de falar</h3><p>Checklist: objetivo, mensagem principal, começo, exemplos e encerramento.</p><button class="tab" onclick="openModal('antes')">Abrir guia</button></div>
+    <div class="card"><h3>🎤 Durante a fala</h3><p>O que fazer quando esquecer uma palavra, acelerar ou perceber nervosismo.</p><button class="tab" onclick="openModal('durante')">Abrir guia</button></div>
+    <div class="card"><h3>🌙 Depois da fala</h3><p>Aprenda a avaliar sua apresentação sem transformar um erro em julgamento sobre você.</p><button class="tab" onclick="openModal('depois')">Abrir guia</button></div>
+    <div class="card"><h3>🗣️ Frases de apoio</h3><p>Modelos para começar, ganhar tempo, mudar de assunto e concluir.</p><button class="tab" onclick="openModal('frases')">Ver frases</button></div>
+    <div class="card"><h3>🧠 Organizador de ideias</h3><p>Monte uma fala simples usando a estrutura “ideia → exemplo → conclusão”.</p><button class="tab" onclick="openModal('organizador')">Montar fala</button></div>
+    <div class="card"><h3>💚 Acolhimento</h3><p>Se você sentir medo, vergonha ou insegurança, esta área oferece estratégias simples para voltar ao presente.</p><button class="tab" onclick="openModal('acolhimento')">Entrar no espaço</button></div>
+  </div>
+</div>
+
+<div id="progresso" class="page">
+  <div class="section-head"><div><h2>Meu progresso 📈</h2><p>Acompanhe suas próprias conquistas, sem competição.</p></div></div>
+  <div class="grid three">
+    <div class="card"><span class="pill">Atividades</span><h2 id="statActivities">3</h2><p>atividades concluídas</p></div>
+    <div class="card"><span class="pill">Sequência</span><h2 id="statStreak">2 dias</h2><p>de prática</p></div>
+    <div class="card"><span class="pill">Confiança</span><h2 id="statConfidence">🌱</h2><p>crescendo passo a passo</p></div>
+  </div>
+  <div class="card" style="margin-top:15px"><h3>Mapa de habilidades</h3>
+    <p>Respiração</p><div class="progress"><i style="--w:72%"></i></div>
+    <p>Organização de ideias</p><div class="progress"><i style="--w:55%"></i></div>
+    <p>Improviso</p><div class="progress"><i style="--w:42%"></i></div>
+    <p>Expressão vocal</p><div class="progress"><i style="--w:61%"></i></div>
+  </div>
+</div>
+
+<footer><strong>💬 Conecta+</strong><small>Comunicação que acolhe. Feito para praticar no seu ritmo.</small><small>© 2026 Conecta+</small></footer>
+</section>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function go(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2800)}
+
+const questions=[
+ {q:'Quando você precisa falar em público, o que aparece primeiro?',o:['Meu coração acelera ou fico muito tenso.','Minha cabeça fica cheia e me perco.','Tenho medo de ser julgado.','Não sei bem por onde começar.']},
+ {q:'Qual situação mais te desafia?',o:['Apresentações formais.','Reuniões ou trabalhos em grupo.','Falar com pessoas desconhecidas.','Improvisar sem preparação.']},
+ {q:'O que acontece com sua voz?',o:['Fica trêmula ou baixa.','Falo rápido demais.','Minha voz some quando fico nervoso.','Minha voz fica normal.']},
+ {q:'Quando esquece uma palavra durante a fala, você costuma…',o:['Entrar em pânico.','Tentar preencher o silêncio rapidamente.','Ficar pensando no que os outros estão achando.','Respirar e continuar, mesmo com dificuldade.']},
+ {q:'Que tipo de treino parece mais confortável hoje?',o:['Exercícios de respiração.','Jogos e brincadeiras.','Treinos com roteiro.','Desafios bem pequenos.']}
+];
+let qi=0, answers=[];
+function renderQuestion(){const q=questions[qi];document.getElementById('qCounter').textContent=`Pergunta ${qi+1} de ${questions.length}`;document.getElementById('questionText').textContent=q.q;document.getElementById('options').innerHTML=q.o.map((x,i)=>`<button class="option ${answers[qi]===i?'selected':''}" onclick="selectAnswer(${i})">${x}</button>`).join('')}
+function selectAnswer(i){answers[qi]=i;renderQuestion()}
+function nextQuestion(){if(answers[qi]===undefined){showToast('Escolha uma opção para continuar 💛');return} if(qi<questions.length-1){qi++;renderQuestion()}else{finishQuiz()}}
+function prevQuestion(){if(qi>0){qi--;renderQuestion()}}
+function finishQuiz(){
+ let counts=[0,0,0,0]; answers.forEach((a,i)=>counts[(a+i)%4]++);
+ let max=Math.max(...counts), type=counts.indexOf(max);
+ const profiles=[
+  ['Acalmar o corpo 🌿','Seu caminho pode começar pela respiração, pausas e exposição gradual. Antes de tentar “parecer confiante”, vamos ajudar seu corpo a se sentir seguro.',['Respiração 4–6','Pausa consciente','Mini desafio de 30s']],
+  ['Organizar pensamentos 🧩','Você pode se beneficiar de estruturas simples para transformar várias ideias em uma mensagem clara.',['Ideia → exemplo → conclusão','Palavras-chave','Roteiro de 3 pontos']],
+  ['Construir segurança 💚','Vamos trabalhar a autocrítica e a sensação de estar sendo observado. O foco é praticar, não performar perfeição.',['Espelho gentil','Frases de apoio','Desafio com pessoa de confiança']],
+  ['Desenvolver espontaneidade 🎈','Treinos de improviso podem ajudar você a confiar mais na própria capacidade de continuar mesmo quando algo sai do plano.',['O assunto maluco','História de 3 palavras','Perguntas surpresa']]
+ ];
+ const p=profiles[type];
+ document.getElementById('quiz').style.display='none';
+ const r=document.getElementById('diagnosticResult');r.style.display='block';r.innerHTML=`<span class="pill">Seu ponto de partida</span><h2>${p[0]}</h2><p>${p[1]}</p><h3>Comece por aqui:</h3><div class="tabs">${p[2].map(x=>`<span class="pill">${x}</span>`).join('')}</div><button class="primary" onclick="go('treinos')">Ver meus treinos →</button><button class="tab" onclick="resetQuiz()">Refazer diagnóstico</button>`;
+ showToast('Mapa criado! Vamos no seu ritmo 🌷');
+}
+function resetQuiz(){qi=0;answers=[];document.getElementById('quiz').style.display='block';document.getElementById('diagnosticResult').style.display='none';renderQuestion()}
+
+const trainings=[
+ ['ansiedade','🌿','Respiração 4–6','2 min','Inspire por 4 segundos e solte o ar por 6. Repita 5 vezes.'],
+ ['clareza','🧩','Ideia em 3 partes','5 min','Escolha um assunto e monte: ideia principal → exemplo → conclusão.'],
+ ['voz','🎤','Voz com presença','3 min','Leia uma frase três vezes: baixa, confortável e projetando para alguém no fundo da sala.'],
+ ['improviso','🎈','História de 3 palavras','4 min','Escolha três palavras aleatórias e conecte-as em uma história curta.'],
+ ['ansiedade','💚','Pausa segura','2 min','Pare, apoie os pés no chão, observe 3 coisas ao redor e retome.'],
+ ['clareza','🗣️','Explica para uma criança','5 min','Explique um assunto difícil usando palavras simples e um exemplo.']
+];
+function renderTrainings(filter='all'){document.getElementById('trainingGrid').innerHTML=trainings.filter(x=>filter==='all'||x[0]===filter).map((x,i)=>`<article class="card"><div class="action-icon ${i%2?'green':'violet'}">${x[1]}</div><span class="pill">${x[3]}</span><h3>${x[2]}</h3><p>${x[4]}</p><button class="primary" onclick="completeTraining(this)">Começar</button></article>`).join('')}
+function filterTraining(f,b){document.querySelectorAll('#treinos .tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderTrainings(f)}
+function completeTraining(btn){btn.textContent='✓ Concluído';btn.disabled=true;updateProgress();showToast('Mais uma pequena conquista! 🌱')}
+
+const topics=['uma viagem inesquecível','seu café da manhã perfeito','um superpoder inútil','um objeto que merece um filme','um aplicativo inventado por você','uma comida que representa sua personalidade','o melhor conselho que já recebeu','um planeta onde ninguém pode usar celular','um animal que seria um ótimo professor'];
+function randomTopic(){const x=topics[Math.floor(Math.random()*topics.length)];document.getElementById('randomEmoji').textContent=['🎈','🧠','☕','🚀','🐳','🎬'][Math.floor(Math.random()*6)];document.getElementById('randomPrompt').textContent=x}
+let timerInt,seconds=30;
+function startSpeakingTimer(){clearInterval(timerInt);seconds=30;document.getElementById('randomPrompt').textContent='Fale agora! Não precisa ser perfeito. 🌷';const btn=event?.target;if(btn)btn.disabled=true;timerInt=setInterval(()=>{seconds--;document.getElementById('randomEmoji').textContent=`00:${String(seconds).padStart(2,'0')}`;if(seconds<=0){clearInterval(timerInt);document.getElementById('randomEmoji').textContent='👏';document.getElementById('randomPrompt').textContent='Você fez! Como foi?';if(btn)btn.disabled=false;updateProgress();showToast('30 segundos concluídos! Você conseguiu 💛')}},1000)}
+function mirrorFeedback(){const v=document.getElementById('mirrorText').value.trim();document.getElementById('mirrorFeedback').textContent=v?`Isso já é um começo. ${v.length>80?'Você se permitiu elaborar bastante.':'Você identificou algo importante em você.'} Agora tente dizer isso em voz alta. 💚`:'Escreva uma qualidade sua primeiro. Pode ser algo bem simples.'}
+function completeChallenge(btn){btn.textContent='✓ Desafio aceito';btn.disabled=true;updateProgress();showToast('Desafio registrado. Um passo de cada vez 🏆')}
+
+function startBreathing(){go('treinos');setTimeout(()=>openActivity('breathing'),250)}
+function openActivity(type){
+ go('treinos');
+ setTimeout(()=>{
+  if(type==='breathing'){openModal('respirar')}
+  else if(type==='trava'){openModal('trava')}
+  else {openModal('confianca')}
+ },200)
+}
+const modalTexts={
+ acolhimento:`<span class="pill">Espaço seguro</span><h2>Você pode desacelerar. 💚</h2><p>Sentir nervosismo ao falar é uma experiência comum. Aqui, a proposta não é eliminar sentimentos à força, e sim encontrar maneiras gentis de continuar.</p><ul><li>Coloque os pés no chão.</li><li>Solte os ombros.</li><li>Faça uma expiração um pouco mais longa.</li><li>Escolha uma única próxima ação.</li></ul><p><strong>Se hoje não der para fazer tudo, tudo bem. Reduza o exercício.</strong></p>`,
+ respirar:`<span class="pill">2 minutos</span><h2>Respiração guiada 🌿</h2><div class="breath">Inspire<br>4s</div><p style="text-align:center">Deixe o círculo ajudar no ritmo. Inspire quando ele crescer e expire quando ele diminuir.</p>`,
+ trava:`<span class="pill">Quando as palavras somem</span><h2>Plano B para não travar 🧩</h2><p>Você pode usar uma frase de transição enquanto reorganiza o pensamento:</p><p class="prompt">“Deixa eu organizar essa ideia por um segundo…”</p><p>Depois, volte para uma palavra-chave. Não é obrigatório preencher todo silêncio.</p>`,
+ confianca:`<span class="pill">Confiança gentil</span><h2>Troque julgamento por curiosidade 💚</h2><p>Em vez de perguntar “Será que estão me achando ruim?”, experimente:</p><p class="prompt">“O que eu quero que essa pessoa entenda?”</p><p>Isso devolve sua atenção para a mensagem, não para uma avaliação imaginada.</p>`,
+ antes:`<h2>Antes de falar 🎯</h2><ol><li>Defina uma única mensagem principal.</li><li>Escolha 2 ou 3 pontos de apoio.</li><li>Prepare a primeira frase.</li><li>Pratique o começo e o final.</li><li>Faça uma pausa antes de começar.</li></ol>`,
+ durante:`<h2>Durante a fala 🎤</h2><ul><li>Fale um pouco mais devagar do que sua ansiedade pede.</li><li>Olhe para uma pessoa ou região confortável da sala.</li><li>Se esquecer algo, faça uma pausa.</li><li>Use palavras-chave, não tente decorar tudo.</li></ul>`,
+ depois:`<h2>Depois da fala 🌙</h2><p>Faça três perguntas: O que funcionou? O que aprendi? Qual uma coisa pequena que tentarei diferente na próxima vez?</p><p>Evite transformar uma apresentação em um julgamento sobre seu valor pessoal.</p>`,
+ frases:`<h2>Frases de apoio 🗣️</h2><ul><li>“Vou começar por uma ideia principal.”</li><li>“Deixa eu explicar isso de outro jeito.”</li><li>“Vou fazer uma pequena pausa para organizar o pensamento.”</li><li>“Para concluir, quero destacar uma coisa…”</li></ul>`,
+ organizador:`<h2>Organizador de ideias 🧩</h2><p><strong>1. Ideia:</strong> o que você quer dizer?</p><p><strong>2. Exemplo:</strong> como isso aparece na prática?</p><p><strong>3. Conclusão:</strong> o que a pessoa deve lembrar?</p><button class="primary" onclick="closeModal();showToast('Agora transforme cada parte em uma frase curta ✨')">Entendi</button>`
+};
+function openModal(key){document.getElementById('modalContent').innerHTML=modalTexts[key]||'<h2>Em breve ✨</h2>';document.getElementById('modalBack').classList.add('open')}
+function closeModal(){document.getElementById('modalBack').classList.remove('open')}
+
+let activityCount=3;
+function updateProgress(){activityCount++;document.getElementById('statActivities').textContent=activityCount;let pct=Math.min(90,35+(activityCount-3)*7);document.getElementById('progressBar').style.setProperty('--w',pct+'%');document.getElementById('progressText').textContent=pct+'%'}
+
+document.getElementById('globalSearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();if(q.length<2)return;const match=trainings.find(x=>x[2].toLowerCase().includes(q)||x[4].toLowerCase().includes(q));if(match){go('treinos');showToast(`Encontrei um treino: ${match[2]}`)}});
+
+renderQuestion();renderTrainings();
+</script>
+</body>
+</html>
